@@ -1,14 +1,17 @@
-# Use a lightweight OpenJDK image
-FROM eclipse-temurin:17-jdk-alpine
+# Use Java base image
+FROM eclipse-temurin:17-jdk
 
-# Set work directory inside container
+# Set work directory
 WORKDIR /app
 
-# Copy project files
+# Copy files
 COPY . .
 
-# Build the Spring Boot app
+# ✅ Make mvnw executable
+RUN chmod +x ./mvnw
+
+# Build the app
 RUN ./mvnw clean package -DskipTests
 
 # Run the app
-CMD ["java", "-jar", "target/bugtracker-0.0.1-SNAPSHOT.jar"]
+CMD ["./mvnw", "spring-boot:run"]
