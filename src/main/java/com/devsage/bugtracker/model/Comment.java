@@ -1,7 +1,9 @@
 package com.devsage.bugtracker.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,6 +23,7 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "bug_id")
+    @JsonBackReference
     private Bug bug;
 
     @ManyToOne
